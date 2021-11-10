@@ -19,9 +19,26 @@ int lines_counter(FILE *file){
             lines++;
     
     lines++;
-
     rewind(file);
     return lines;
+}
+
+int words_counter(FILE *file){
+    int words = 0;
+    char c, prev = ' ';
+    while ((c = fgetc(file)) != EOF){
+        if(c ==' ' || c == '\n' || c == '\t')
+            if(isspace(prev) == 0)
+                    words++;
+        prev = c;
+    }
+
+    if (isspace(prev) == 0)
+        words++;
+    
+    rewind(file);
+    return words;
+
 }
 
 void solve(const char *filename, const char* request){
