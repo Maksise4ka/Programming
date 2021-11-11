@@ -39,7 +39,7 @@ int convert_to90(time t){
 int a[1900000];
 int main(){
     FILE *file;
-    file = fopen("access_log_Jul95", "r");
+    file = fopen("access_logmini", "r");
     char str[500];
     int ans1 = 0;
     allpos pos = init();
@@ -51,8 +51,8 @@ int main(){
         pos = split(str);
         char status = str[pos.statuss];
         if (status == '5')
-            ans1++
-            
+            ans1++;
+
         // 2 вопрос
         char *tmp = slice_time(str, pos.times, pos.timee);
         time t = init_time(tmp); 
@@ -83,7 +83,6 @@ int main(){
     }
 
     printf("quest 1: %d \nquest 2: %d, from %d to %d", ans1, ans2, ansl, ansr);
->>>>>>> final_stage
     // ответ 76
     fclose(file);
     return 0;
