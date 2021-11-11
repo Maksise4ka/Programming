@@ -39,20 +39,20 @@ int convert_to90(time t){
 int a[1900000];
 int main(){
     FILE *file;
-    file = fopen("access_logmini", "r");
+    file = fopen("access_log_Jul95", "r");
     char str[500];
     int ans1 = 0;
     allpos pos = init();
     int i = 0;
-    while (!feof(file)) {
+    while (!feof(file)){
         fgets(str, 500, file);
 
         //1 вопрос
         pos = split(str);
         char status = str[pos.statuss];
         if (status == '5')
-            ans1++;
-
+            ans1++
+            
         // 2 вопрос
         char *tmp = slice_time(str, pos.times, pos.timee);
         time t = init_time(tmp); 
@@ -61,7 +61,29 @@ int main(){
         i++;
         
     }
-    printf("%d", ans1);
+
+    // продолжение второго вопроса
+    int n;
+    scanf("%d", &n);
+    int ansl = 0, ansr = 0, l = 0, r = 0, ans2 = 0;
+    for(int i = 0; i < 1900000; ++i){
+        if (a[i] == 0)
+            break;
+        if (a[i] - a[l] > n){
+            int k = i - l;
+            if (k > ans2){
+                ansr = i - 1;
+                ansl = l;
+                ans2 = ansr - ansl + 1;
+            }
+
+        while (a[i] - a[l] > n)
+            l += 1;
+        }
+    }
+
+    printf("quest 1: %d \nquest 2: %d, from %d to %d", ans1, ans2, ansl, ansr);
+>>>>>>> final_stage
     // ответ 76
     fclose(file);
     return 0;
