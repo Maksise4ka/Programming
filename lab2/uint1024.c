@@ -81,7 +81,6 @@ uint1024_t add_op(uint1024_t x, uint1024_t y){
 uint1024_t subtr_op(uint1024_t x, uint1024_t y){
     uint1024_t result = init();
     int prev = 0;
-
     for(int i = 0; i < 128; ++i){
 
         for(int j = 0; j < 8; ++j){
@@ -114,14 +113,11 @@ uint1024_t subtr_op(uint1024_t x, uint1024_t y){
 
 uint1024_t mult_op(uint1024_t x, uint1024_t y){
     uint1024_t result = init();
-    
     for(int i = x.index; i >= 0; --i){
-    
         int cur = (x.n[i / 8] >> (7 - i % 8)) & 1;
-
-        if(cur){
+        if(cur) {
             uint1024_t tmp = init();
-            for(int j = 0; j <= y.index; ++j){
+            for(int j = 0; j <= y.index; ++j) {
                 int cury = (y.n[j / 8] >> (7 - j % 8)) & 1;
                 int cur_index = i + j;
                 tmp.n[cur_index / 8] = (char) ((tmp.n[cur_index / 8] >> (7 - cur_index % 8 )) | (cury)) << (7 - cur_index % 8);
@@ -136,7 +132,37 @@ uint1024_t mult_op(uint1024_t x, uint1024_t y){
     return result;
 }
 
+void printf_value(uint1024_t x) {
+    char10 result = init10();
+    char10 degree = init10();
+    degree.n[0] = 1;
+    for(int i = 0; i <= x.index; ++i) {
+        int cur = (x.n[i / 8] >> (7 - i % 8)) & 1;
+        if (cur) {
+            result = add10(result, degree);
+        }
+        degree = add10(degree, degree);
+    }
+    printf10(result);
+    free_char10(result);
+    free_char10(degree);
+}
 
+void fprintf_value(uint1024_t x, FILE *file) {
+    char10 result = init10();
+    char10 degree = init10();
+    degree.n[0] = 1;
+    for(int i = 0; i <= x.index; ++i) {
+        int cur = (x.n[i / 8] >> (7 - i % 8)) & 1;
+        if (cur) {
+            result = add10(result, degree);
+        }
+        degree = add10(degree, degree);
+    }
+    fprintf10(result, file);
+    free_char10(result);
+    free_char10(degree);
+}
 
 int main(void) {
     uint1024_t a = init();
