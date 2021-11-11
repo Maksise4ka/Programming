@@ -47,6 +47,38 @@ uint1024_t from_uint(unsigned int x){
     num.index --;
 
     return num;
+
+uint1024_t add_op(uint1024_t x, uint1024_t y){
+    uint1024_t result = init();
+    int prev = 0;
+
+    for(int i = 0; i < 128; ++i){
+
+        for(int j = 0; j < 8; ++j){
+            int digx = ((x.n[i] >> (7 - j)) & 1);
+            int digy = ((y.n[i] >> (7 - j)) & 1);
+      
+            result.n[i] = (char) ((result.n[i] >> (7 - j) ) | ((digx + digy + prev) % 2)) << (7 - j);
+
+            if ((digx && digy) || ((digx || digy) && prev))
+                prev = 1;
+            else
+                prev = 0;
+      
+        int cur = (result.n[i] >> (7 - j)) & 1;
+        if (cur)
+            result.index = i * 8 + j;
+
+    }
+
+  }
+
+    if (prev){
+        printf("UB\n");
+        return init();
+    }
+
+    return result;
 }
 
 int main(void) {
