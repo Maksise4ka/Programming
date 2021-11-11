@@ -78,7 +78,6 @@ uint1024_t add_op(uint1024_t x, uint1024_t y){
         printf("UB\n");
         return init();
     }
-
     return result;
 }
 
