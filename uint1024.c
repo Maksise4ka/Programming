@@ -209,9 +209,40 @@ void bin_exp(uint1024_t x){
 }
 
 int main(void) {
+    FILE *fin, *fout;
+    fin = fopen("input.txt", "r");
+    fout = fopen("output.txt", "w");
     uint1024_t a = init();
     uint1024_t b = init();
     uint1024_t sum = init();
     uint1024_t sub = init();
     uint1024_t mult = init();
+
+    for(int i = 0; i < 100; ++i){
+        int arg;
+        
+        fscanf(fin,"%d", &arg);
+        
+        fscanf_value(&a, fin);
+        fscanf_value(&b, fin);
+        fscanf_value(&sum, fin);
+        fscanf_value(&sub, fin);
+        if (arg == 5)
+            fscanf_value(&mult, fin);
+        
+        fprintf_value(a, fout);
+        fprintf_value(b, fout);
+        fprintf_value(add_op(a, b), fout);
+        fprintf_value(subtr_op(a,b), fout);
+        
+        if (arg == 5){
+            fprintf_value(mult_op(a, b), fout);
+        }
+
+        fprintf(fout, "\n");
+
+    }
+    
+    fclose(fin);
+    fclose(fout);
 }
