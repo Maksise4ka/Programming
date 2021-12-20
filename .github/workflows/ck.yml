@@ -24,4 +24,4 @@ jobs:
         name: main.exe
         with:
             - path: main
-            - name:main.exe
+            #- name:main.exe
