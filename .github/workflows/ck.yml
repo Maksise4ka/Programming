@@ -8,8 +8,8 @@ jobs:
     steps:
 #      - name: Install gtest
 #        run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
-      - uses: actions/checkout@v2
-      - run: git checkout develop_lab2
+      - uses: actions/checkout@develop_lab2
+#      - run: git checkout develop_lab2
       - run: g++ testuint.cpp -o main -lgtest 
       - run: git 
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
