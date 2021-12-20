@@ -6,20 +6,18 @@ jobs:
     container:
       image: docker://srzzumix/googletest:latest
     steps:
-#      - name: Install gtest
-#        run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
-      - uses: actions/checkout@v2
-      - run: git log --all --oneline
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: checkout to branch
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
       - run: git checkout develop_lab2
-      - run: g++ testuint.cpp -o main -lgtest 
-      - run: git 
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: compile file
+        run: g++ testuint.cpp -o main -lgtest -lpthread
+      - run: ./main
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
             name: build
-            path: main.exe
+            path: main
