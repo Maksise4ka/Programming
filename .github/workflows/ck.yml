@@ -6,15 +6,7 @@ jobs:
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: mkdir /usr/src/gtest&&
-            cd /usr/src/gtest&&
-            sudo apt-get install libgtest-dev&&
-            sudo cmake CMakeLists.txt&&
-            sudo make&&
-            sudo cp *.a /usr/lib&&
-            sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a&&
-            sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a&&
-            cd
+      - run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: git checkout release_lab2
