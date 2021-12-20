@@ -6,11 +6,17 @@ jobs:
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: cd /usr/src/gtest&&
+            sudo cmake CMakeLists.txt&&
+            sudo make&&
+            sudo cp *.a /usr/lib&&
+            sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a&&
+            sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a&&
+            cd
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: git checkout release_lab2
-      - run: gcc uint1024.c -o main
+      - run: g++ testuint.cpp -o main
       - run: git 
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
@@ -18,9 +24,13 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-
+        
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
             name: build
             path: main.exe
+            sudo apt-get install libgtest-dev
+
+
+
