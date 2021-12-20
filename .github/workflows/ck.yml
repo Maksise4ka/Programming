@@ -21,7 +21,6 @@ jobs:
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.3.1
-        name: main.exe
         with:
-            - name: build
-            - path: main.exe
+            name: build
+            path: main.exe
