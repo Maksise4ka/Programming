@@ -9,9 +9,17 @@ jobs:
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: gcc
+      - run: git checkout release_lab2
+      - run: gcc uint1024.c -o main
+      - run: git 
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.3.1
+        name: main.exe
+        path: main
