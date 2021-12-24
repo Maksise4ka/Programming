@@ -287,7 +287,7 @@ TEST(Test_mult_op, Testname1) {
     uint1024_t num1 = mult_op(from_uint(1000), from_uint(1000));
     EXPECT_EQ("1000000", out(num1));
     uint1024_t num2 = mult_op(from_uint(1000), from_uint(1000));
-    EXPECT_EQ("1100000", out(num2));
+    EXPECT_EQ("1000000", out(num2));
     uint1024_t num3 = mult_op(from_uint(8963526), from_uint(1223498));
     EXPECT_EQ("10966856133940", out(num3));
 }
