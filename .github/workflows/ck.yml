@@ -8,6 +8,8 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: checkout to branch
         uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
       - run: git checkout develop_lab2
       - name: compile file
         run: |
