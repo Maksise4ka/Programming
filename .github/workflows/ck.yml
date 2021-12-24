@@ -3,11 +3,17 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    container:
-      image: docker://srzzumix/googletest:latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Install googletests
+        run: |
+            sudo apt-get install libgtest-dev
+            cd /usr/src/gtest
+            sudo cmake CMakeLists.txt
+            sudo make
+            cd lib
+            sudo cp *.a /usr/lib
       - name: checkout to branch
         uses: actions/checkout@v2
         with:
