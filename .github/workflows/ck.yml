@@ -3,6 +3,8 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    container:
+      image: docker://srzzumix/googletest:latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -12,10 +14,8 @@ jobs:
             fetch-depth: 0
       - run: git checkout develop_lab2
       - name: compile file
-        run: |
-            cd uint1024_t
-            make build
-            make google-test
+        run: g++ testuint.cpp -o main -lgtest -lpthread
+      - run: ./main
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
