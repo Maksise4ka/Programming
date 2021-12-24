@@ -280,7 +280,7 @@ TEST(Test_subtr, Testname1) {
     uint1024_t num2 = subtr_op(from_uint(90852), from_uint(10005));
     EXPECT_EQ("80847", out(num2));
     uint1024_t num3 = subtr_op(from_uint(8963526), from_uint(1223498));
-    EXPECT_EQ("7740028", out(num3));
+    EXPECT_EQ("7730028", out(num3));
 }
 
 TEST(Test_mult_op, Testname1) {
