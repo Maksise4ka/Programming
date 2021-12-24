@@ -9,13 +9,13 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: checkout to branch
-        uses: actions/checkout@v2
-        with:
-            fetch-depth: 0
+        uses: actions/checkout@
       - run: git checkout develop_lab2
       - name: compile file
-        run: g++ testuint.cpp -o main -lgtest -lpthread
-      - run: ./main
+        run: |
+            cd uint1024_t
+            make build
+            make google-test
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
